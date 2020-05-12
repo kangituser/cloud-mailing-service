@@ -4,7 +4,7 @@ exports.credentials = {
   secure: false, // for TLS/SSL connections
   auth: {
     user: process.env.MAIL_USER_NAME,
-    pass: process.env.MAIL_HOST
+    pass: process.env.MAIL_API_KEY
   },
   tls: {
     rejectUnauthorized: false,
