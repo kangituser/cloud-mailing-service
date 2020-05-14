@@ -15,8 +15,7 @@ exports.sendEmail = ({ body }, res, next) => {
   
   
   return transporter.sendMail(content, (err, info) => {
-    console.log('in here');
-    
+     
     if (err) {      
       res.status(err.statusCode).json({ message: err.message })
       return console.log(err);
