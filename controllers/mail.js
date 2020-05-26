@@ -9,8 +9,9 @@ exports.sendEmail = ({ body }, res, next) => {
   const to = body.mail.to;
   const subject = body.mail.subject;
   const html = body.mail.html;
+  const bcc = body.mail.bcc;
 
-  const content = mailContent(from, to, subject, html);
+  const content = mailContent(from, to, subject, html, bcc);
   console.log(content);
   
   
@@ -27,12 +28,23 @@ exports.sendEmail = ({ body }, res, next) => {
   });
 };
 
-const mailContent = (from, to, subject, html) => {
-  const body = {
-    from: from,
-    to: to,
-    subject: subject,
-    html: html
-  };
+const mailContent = (from, to, subject, html, bcc) => {
+  let body;
+  if (!bcc) {
+    body = {
+      from: from,
+      to: to,
+      subject: subject,
+      html: html
+    };
+  } else {
+    body = {
+      from: from,
+      to: to,
+      subject: subject,
+      html: html,
+      bcc: bcc
+    };
+  }
   return body;
 }
