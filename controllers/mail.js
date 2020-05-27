@@ -3,7 +3,7 @@ const credentials = require('../util/mail-credentials');
 
 const transporter = nodemailer.createTransport(credentials.credentials);
 
-exports.sendEmail = ({ body }, res, next) => { 
+exports.sendEmail = async ({ body }, res, next) => { 
   
   const from = body.mail.from;
   const to = body.mail.to;
@@ -11,15 +11,13 @@ exports.sendEmail = ({ body }, res, next) => {
   const html = body.mail.html;
   const bcc = body.mail.bcc;
 
-  const content = mailContent(from, to, subject, html, bcc);
-  console.log(content);
-  
-  
+  const content = await mailContent(from, to, subject, html, bcc);
+  // const content = await mailContent(from, to, subject, html);
   return transporter.sendMail(content, (err, info) => {
+     console.log(err);
      
     if (err) {      
-      res.status(err.statusCode).json({ message: err.message })
-      return console.log(err);
+      res.status(500).json({ message: err.message })
     }
     console.log('Message sent: %s', info.messageId);
     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
@@ -28,7 +26,7 @@ exports.sendEmail = ({ body }, res, next) => {
   });
 };
 
-const mailContent = (from, to, subject, html, bcc) => {
+const mailContent = async (from, to, subject, html, bcc) => {
   let body;
   if (!bcc) {
     body = {
