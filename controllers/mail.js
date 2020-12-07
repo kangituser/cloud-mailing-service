@@ -13,6 +13,8 @@ exports.sendEmail = async ({ body }, res, next) => {
 
   const content = await mailContent(from, to, subject, html, bcc);
   return transporter.sendMail(content, (err, info) => {
+    console.log(err);
+    console.log(content);
     try {
       // console.log('Message sent: %s', info.messageId);
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
