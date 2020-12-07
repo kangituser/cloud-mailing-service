@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
-const credentials = require('../util/mail-credentials');
+const { credentials } = require('../util/mail-credentials');
 
-const transporter = nodemailer.createTransport(credentials.credentials);
+const transporter = nodemailer.createTransport('SMTP', credentials );
 
 exports.sendEmail = async ({ body }, res, next) => { 
   
