@@ -21,7 +21,7 @@ exports.sendEmail = async ({ body }, res, next) => {
       console.log('Sent at: ', new Date());
       return res.status(201).json({ message: 'message was sent', content: content})
     } catch (error) {
-      return res.status(500).json({ message: err.message })
+      return res.status(500).json({ message: error.message })
     }
   });
 };
