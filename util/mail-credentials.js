@@ -3,10 +3,10 @@ exports.credentials = {
   port: 25,
   secure: false,
   requireTLS: true,
-  // auth: {
-  //   user: process.env.MAIL_365_USER,
-  //   pass: ''
-  // },
+  auth: {
+    user: process.env.MAIL_365_USER,
+    // pass: ''
+  },
   // tls: {
   //   rejectUnauthorized: false,
   //   ciphers: 'SSLv3'
