@@ -1,14 +1,5 @@
 exports.credentials = {
   host: process.env.MAIL_HOST,
-  // host: 'smtp.sendgrid.net',
-  port: 587, // 587 - false, 25 - false
-  secure: false, // for TLS/SSL connections
-  auth: {
-    user: process.env.MAIL_USER_NAME,
-    pass: process.env.MAIL_API_KEY
-  },
-  tls: {
-    rejectUnauthorized: false,
-    ciphers: 'SSLv3' // config for TLS/SSL protocol
-  }
+  port: process.env.MAIL_PORT, 
+  secure: process.env.MAIL_SECURE
 };
