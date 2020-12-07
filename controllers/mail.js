@@ -3,9 +3,9 @@ const { credentials } = require('../util/mail-credentials');
 
 const transporter = nodemailer.createTransport(credentials);
 
-console.log(credentials);
 
 exports.sendEmail = async ({ body }, res, next) => { 
+  console.log(credentials);
   
   const from = body.mail.from;
   const to = body.mail.to;
