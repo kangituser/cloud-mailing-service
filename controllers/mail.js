@@ -16,6 +16,7 @@ exports.sendEmail = async ({ body }, res, next) => {
     console.log(err);
     console.log(content);
     try {
+      console.log(info);
       // console.log('Message sent: %s', info.messageId);
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
       console.log('Sent at: ', new Date());
