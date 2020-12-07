@@ -12,17 +12,15 @@ exports.sendEmail = async ({ body }, res, next) => {
   const bcc = body.mail.bcc;
 
   const content = await mailContent(from, to, subject, html, bcc);
-  // const content = await mailContent(from, to, subject, html);
   return transporter.sendMail(content, (err, info) => {
-     console.log(err);
-     
-    if (err) {      
+    try {
+      // console.log('Message sent: %s', info.messageId);
+      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+      console.log('Sent at: ', new Date());
+      return res.status(201).json({ message: 'message was sent', content: content})
+    } catch (error) {
       return res.status(500).json({ message: err.message })
     }
-    // console.log('Message sent: %s', info.messageId);
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    console.log('Sent at: ', new Date());
-    return res.status(201).json({ message: 'message was sent', content: content})
   });
 };
 
