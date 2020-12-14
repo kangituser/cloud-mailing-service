@@ -4,9 +4,7 @@ const { credentials } = require('../util/mail-credentials');
 const transporter = nodemailer.createTransport(credentials);
 
 
-exports.sendEmail = async ({ body }, res, next) => { 
-  console.log(credentials);
-  
+exports.sendEmail = async ({ body }, res, next) => {   
   const from = body.mail.from;
   const to = body.mail.to;
   const subject = body.mail.subject;
@@ -15,11 +13,14 @@ exports.sendEmail = async ({ body }, res, next) => {
 
   const content = await mailContent(from, to, subject, html, bcc);
   return transporter.sendMail(content, (err, info) => {
-    console.log('err: ', err);
-    console.log('content: ', content);
+    if (err) {
+      console.log('err: ', err);
+    } else {
+      console.log('content: ', content);
+    }
     try {
       console.log('info', info);
-      // console.log('Message sent: %s', info.messageId);
+      console.log('Message sent: %s', info.messageId);
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
       console.log('Sent at: ', new Date());
       return res.status(201).json({ message: 'message was sent', content: content})
