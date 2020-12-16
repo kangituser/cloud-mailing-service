@@ -11,6 +11,7 @@ exports.sendEmail = async (req, res, next) => {
     try {
       if (err) {
         console.log("err: ", err);
+        throw err;
       } else {
         console.log("content: ", content);
       }
