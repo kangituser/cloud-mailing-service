@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/mail', mailController.sendEmail);
+app.post('/mail', mailController.sendEmail);
 
 const PORT = process.env.PORT || 8081;
 
