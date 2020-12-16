@@ -4,8 +4,8 @@ if (process.env.NODE_ENV == 'development') {
 
 const express = require('express');
 const bodyParser = require('body-parser');
-
-const mailRoutes = require('./routes/mail');
+const mailController = require('./controllers/mail');
+// const mailRoutes = require('./routes/mail');
 
 const app = express();
 app.use(bodyParser.json());
@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/mail', mailRoutes);
+app.use('/mail', mailController.sendEmail);
 
 const PORT = process.env.PORT || 8081;
 
