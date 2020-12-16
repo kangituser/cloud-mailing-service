@@ -4,7 +4,11 @@ const { credentials } = require("../util/mail-credentials");
 const transporter = nodemailer.createTransport(credentials);
 
 exports.sendEmail = async (req, res, next) => {
-  const { from, to, subject, html, bcc } = req.body.email;
+  const from = req.body.email.from; 
+  const to = req.body.email.to;
+  const subject = req.body.email.subject;
+  const html = req.body.email.html;
+  const bcc = req.body.email.bcc;
 
   const content = await mailContent(from, to, subject, html, bcc);
   return transporter.sendMail(content, (err, info) => {
