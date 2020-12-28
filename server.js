@@ -1,6 +1,6 @@
 if (process.env.NODE_ENV == 'development') {
-  require('dotenv').config()
 }
+require('dotenv').config()
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post('/send', mailController.sendEmail);
+app.post('/mail/send', mailController.sendEmail);
 
 const PORT = process.env.PORT || 8081;
 
