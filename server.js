@@ -3,17 +3,19 @@ if (process.env.NODE_ENV == 'development') {
 }
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const mailController = require('./controllers/mail');
 // const mailRoutes = require('./routes/mail');
 
 const app = express();
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods','OPTIONS, GET, POST, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Cache-Control, multipart/form-data , application/json ,text/plain, text/html');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Cache-Control, multipart/form-data , application/json ,text/plain, text/html, Access-Control-Allow-Headers');
+  if (req.method == "OPTIONS") {
+    return res.status(200);
+  }
   next();
 });
 
